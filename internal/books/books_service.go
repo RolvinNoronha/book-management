@@ -38,8 +38,8 @@ func (s *service) GetAllBooks() ([]Book, error) {
 	return allBooks, nil
 }
 
-func (s *service) GetBookByCategory(category string) ([]Book, error) {
-	allBooks, err := s.Repository.GetBookByCategory(category)
+func (s *service) GetBooks(category string, title string) ([]Book, error) {
+	allBooks, err := s.Repository.GetBooks(category, title)
 
 	if err != nil {
 		return nil, err
@@ -50,4 +50,34 @@ func (s *service) GetBookByCategory(category string) ([]Book, error) {
 	}
 
 	return allBooks, nil
+}
+
+func (s *service) GetBookByID(id int64) (Book, error) {
+	book, err := s.Repository.GetBookByID(id)
+
+	if err != nil {
+		return Book{}, err
+	}
+
+	return book, nil
+}
+
+func (s *service) UpdateBook(id int64, book Book) (Book, error) {
+	book, err := s.Repository.UpdateBook(id, book)
+
+	if err != nil {
+		return Book{}, err
+	}
+
+	return book, nil
+}
+
+func (s *service) DeleteBook(id int64) (int64, error) {
+
+	rows, err := s.Repository.DeleteBook(id)
+	if err != nil {
+		return 0, err
+	}
+
+	return rows, nil
 }

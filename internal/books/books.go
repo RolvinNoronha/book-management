@@ -13,7 +13,10 @@ type Book struct {
 type Repository interface {
 	CreateBook(book *Book) (*Book, error)
 	GetAllBooks() ([]Book, error)
-	GetBookByCategory(category string) ([]Book, error)
+	GetBooks(category string, title string) ([]Book, error)
+	GetBookByID(id int64) (Book, error)
+	UpdateBook(id int64, book Book) (Book, error)
+	DeleteBook(id int64) (int64, error)
 }
 
 type CreateBookRequest struct {
